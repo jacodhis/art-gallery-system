@@ -39,6 +39,7 @@ user |show  {{$art->name}}
                             <p><span>Offered by: <a href="#">{{$art->user->name}}</a></span><br>
                                 <span> Art Price:<a href="#" class="time"> {{$art->price}}</a></span></p>
                             <span class="icon"><i class="fa fa-clock-o"></i>date Posted: <a href="#">{{$art->created_at}}</a></span><br>
+                            
                             <form action="/shooping-cart/{{$art->id}}" class="" method="POST">
                             {{ csrf_field() }}
                               <input type="hidden" name="art_id" value = "{{$art->id}}">
