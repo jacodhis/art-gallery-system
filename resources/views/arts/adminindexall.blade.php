@@ -28,7 +28,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <div class="title pb-3">all arts</div> 
+                  <div class="title pb-3">All Arts</div> 
                   
                   <div class="row">
                   @foreach($allarts as $art)
