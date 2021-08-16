@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          }else{
             $_SESSION['cart'][0 ] = array('name'=>$_POST['item-name'],'price'=>$_POST['price'],'quantity'=>1,'user_id'=>$_POST['user_id']);
             echo "<script>alert('item  added');
-            window.location.href = 'all-Arts.php';
+            window.location.href = 'all-Arts';
              </script>";
             // print_r($_SESSION['cart']);
          }
