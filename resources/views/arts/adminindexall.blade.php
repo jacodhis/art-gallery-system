@@ -1,7 +1,7 @@
-@extends('layouts.artist')
+@extends('layouts.admin')
 
 @section('title')
-  Artist Dashboard
+  admin all-arts page
 @endsection
 
 
@@ -18,29 +18,30 @@
               <div class="card-header">
                 
                   <div class="d-flex justify-content-between align-items-baseline">
-                   <h4 class="card-title">All arts</H4>
+                   <!-- <h4 class="card-title">All arts</H4> -->
                    <div>
-                    <a href="/createArt">Add art</a>|
-                     <a href="{{route('all-Arts')}}">others arts</a>
+                    <!-- <a href="/createArt">Add art</a>| -->
+                     <!-- <a href="{{route('all-Arts')}}">others arts</a> -->
                   </div>
                </div>
 
               </div>
               <div class="card-body">
                 <div class="table-responsive">
+                  <div class="title pb-3">all arts</div> 
                   
-                  
-              
-                <div class="row">
-                  @foreach($arts as $art)
-                    <div class="col-md-3 col-lg-3 col-sm-12">
-                     <a href="/art/{{$art->id}}"> <img src="{{asset('/storage/art/'.$art->image)}}"
+                  <div class="row">
+                  @foreach($allarts as $art)
+                    <a href="/art/{{$art->id}}"><div class="col-md-3 col-lg-3 col-sm-12">
+                   <img src="{{asset('/storage/art/'.$art->image)}}"
                     alt="Image" width="50px" height="50px"></a>
                    <p>  {{$art->name}}</p>
                       </div>
                     @endforeach
                 </div>
+            
 
+           
                        
                 </div>
               </div>

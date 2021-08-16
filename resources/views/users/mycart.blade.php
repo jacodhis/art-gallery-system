@@ -1,3 +1,6 @@
+<?php 
+ session_start() ;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +10,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        @yield('title')
+     my cart|items
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -25,22 +28,22 @@
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-color="red">
+    <div class="sidebar" data-color="yellow">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
       -->
         <div class="logo">
             <a href="#" class="simple-text logo-mini">
-                CT
+                My
             </a>
             <a href="#" class="simple-text logo-normal">
-                ADMIN PAGE
+                menu
             </a>
         </div>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
                 <li>
-                    <a href="/home">
+                <a href="/home">
                         <i class="now-ui-icons design_app"></i>
                         <p>Dashboard</p>
                     </a>
@@ -52,59 +55,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('artists')}}">
-                        <i class="now-ui-icons users_single-02"></i>
-                        <p>all Artists </p>
+                    <a href="{{route('all-Arts')}}">
+                        <i class="now-ui-icons education_atom"></i>
+                        <p>all Arts</p>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('users')}}">
-                        <i class="now-ui-icons users_single-02"></i>
-                        <p>all Users</p>
-                    </a>
-                </li>
-                <li>
+                 <li>
                     <a href="/admin/sales">
                         <i class="now-ui-icons education_atom"></i>
-                        <p>Sales</p>
+                        <p>View buys</p>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('all-Arts')}}">
-                        <i class="now-ui-icons location_map-big"></i>
-                        <p>View Arts</p>
-                    </a>
-                </li>
-              
-               
-               
-                <li class="dropdown">
-                <a  class="dropdown-toggle"
-                          data-toggle="dropdown"> <i class="now-ui-icons design_bullet-list-67"></i>Options </a>
-                        <ul class="dropdown-menu">
-                        <a href="#"> <li class="dropdown-item"> view all users </li></a>
-                        <a href="#"><li class="dropdown-item">view all artists</li></a>
 
-                        </ul>
-                    </li>
-               <!-- <li class="active ">
-                    <a href="./tables.html">
-                        <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Page Content</p>
-                    </a>
-                </li> -->
-                <!--  <li>
-                    <a href="./typography.html">
-                        <i class="now-ui-icons text_caps-small"></i>
-                        <p>Typography</p>
-                    </a>
+           
+                
                 </li>
-                <li class="active-pro">
-                    <a href="./upgrade.html">
-                        <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
+            
+              
             </ul>
         </div>
     </div>
@@ -142,25 +109,9 @@
                     <span class="navbar-toggler-bar navbar-kebab"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                    <!-- <form>
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </form> -->
+          
                     <ul class="navbar-nav">
-                        <!-- <li class="nav-item">
-                          <a class="nav-link" href="#pablo">
-                            <i class="now-ui-icons media-2_sound-wave"></i>
-                            <p>
-                              <span class="d-lg-none d-md-block">Stats</span>
-                            </p>
-                          </a>
-                        </li> -->
+                   
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- <i class="now-ui-icons location_world"></i> -->
@@ -189,21 +140,158 @@
 
                             <!-- </div> -->
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
-                                <i class="now-ui-icons users_single-02"></i>
-                                <p>
-                                    <span class="d-lg-none d-md-block">Account</span>
-                                </p>
-                            </a>
-                        </li> -->
+                       
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- End Navbar -->
 
-        @yield('content')
+        <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+               <div class="d-flex align-items-baseline justify-content-between">
+                 <h5 class="title">my cart</h5>
+                 <?php 
+                   
+                    $count = 0;
+                    if(isset($_SESSION['cart'])){
+                        $count = count($_SESSION['cart']);
+
+                    }
+                    ;?>
+                 <a href="/mycart" class="d-flex">
+                         <img src="/images/cart-logo.png" style="height:20px"  >
+                        <p class="pl-4">My Cart(<?php echo $count ;?>)</p>
+                    </a>
+               </div>
+                            
+             
+
+               <div class="container">
+                    <div class="row">
+                   <div class="col-lg-12 text-center border rounded bg-light my-5">
+                    <h1>My Cart</h1>
+               </div>
+
+            <div class="col-md-8">
+            
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">user Id</th>
+                                <th scope="col">Item name</th>
+                                <th scope="col">Item Price</th>
+                                <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                        <tbody class="text-center">
+                            <?php 
+                          
+                            $total = 0;
+                            $qun = 1;
+
+                            
+                        
+                            if(isset($_SESSION['cart'])){
+                                // $my_items = array_column($_SESSION['cart'],'user_id');
+                                // if(in_array(auth()->user()->id,$my_items)){
+                                   
+                                // }else{
+
+                                // }
+
+                                foreach($_SESSION['cart'] as $key => $value){
+                                    $sr = $key+1;
+                                    $total = $total+$value['price'];
+                                     
+                                    ?>
+                                   
+                                    <tr>
+                                      <td><?php echo $value['user_id'];?></td>
+                                        <td><?php echo $value['name'];?></td>
+                                        <td><?php echo $value['price'];?></td>
+                                        
+                                        <td><input type="number" class = "text-center" value="<?php echo $value['quantity'];?>" min="1" max="10"></td>
+                                        <td>
+                                            <form action="managecart.php" method="POST">
+                                                <input type="hidden" name="item_name" value="<?php echo $value['name']?>">
+                                                
+                                            <button class="btn btn-sm btn-outline-danger" name="remove_item">remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+             
+             
+                                <?php
+                                 }
+                                
+                            }else{
+                                echo "cart items = 0 ";
+                            }
+                            
+                            ;?>
+                            
+                        
+                         </tbody>
+                        </table>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="border bg-light rounded p-4">
+                <h3 class="">Total : <?php echo $total;?></h3>
+                <form action="" method="post">
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                     m-pesa
+                    </label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      check on delivery option
+                    </label>
+                    </div>
+                    <button class="btn btn-primary btn-block">make payment</button>
+                </form>
+
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    
+
+               </div>
+              
+
+            
+
+
+               
+
+           
+            
+
+             
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
 
 
 
@@ -212,28 +300,21 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="/admin/categories">
-                                Categories
-                            </a>
+                           <a href="">#</a>
                         </li>
                         <li>
-                            <a href="/admin/ads">
-                                Ads
+                            <a href="#">
+                                #
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                Blog
+                                #
                             </a>
                         </li>
                     </ul>
                 </nav>
-                <!-- <div class="copyright" id="copyright">
-                    &copy; <script>
-                        document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-                    </script>, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                </div>
-            </div> -->
+                
         </footer>
     </div>
 </div>
@@ -258,3 +339,4 @@
 </body>
 
 </html>
+

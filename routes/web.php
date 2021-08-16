@@ -14,8 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//view profile forany user
 Route::get('/profile/{user_id}','usersController@profile')->name('profile');
+//update any users profile 
+Route::PUT('/update-user-profile','usersController@updateprofile')->name('update-user   ');
+
+//admin view users
+Route::get('/users','usersController@users')->name('users');
+//admin view artists
+Route::get('/artists','usersController@artists')->name('artists');
 
 //all arts except for the artist logged in
 Route::get('/all-Arts','artsController@index')->name('all-Arts');
@@ -32,6 +39,7 @@ Route::get('/art/{id}','artsController@show')->name('show-art');
 
 //art shopping cart
 Route::post('/shooping-cart/{id}','shoppingcartController@cart')->name('add-to-cart');
+Route::get('/mycart','shoppingcartController@mycart')->name('my-cart');
 
 //auth
 Auth::routes();

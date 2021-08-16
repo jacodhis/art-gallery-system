@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,9 +66,18 @@
                 </li>
 
                 <li>
-                    <a href="/admin/sales">
-                        <i class="now-ui-icons education_atom"></i>
-                        <p>My Cart</p>
+                    <?php 
+                    session_start();
+                    $count = 0;
+                    if(isset($_SESSION['cart'])){
+                        $count = count($_SESSION['cart']);
+
+                    }
+                    ;?>
+                    <!-- <a href="/mycart.php" class="d-flex"> -->
+                    <a href="/mycart" class="d-flex">
+                         <img src="/images/cart-logo.png" style="height:20px"  >
+                        <p class="pl-4">My Cart(<?php echo $count ;?>)</p>
                     </a>
                 </li>
             

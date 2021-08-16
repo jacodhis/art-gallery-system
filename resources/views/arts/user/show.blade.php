@@ -36,20 +36,27 @@ user |show  {{$art->name}}
 
                <div class="col-lg-5 pl-8 pb-8">
                <h3 class="title">{{$art->name}}</h3>
+               
+                 
                             <p><span>Offered by: <a href="#">{{$art->user->name}}</a></span><br>
                                 <span> Art Price:<a href="#" class="time"> {{$art->price}}</a></span></p>
                             <span class="icon"><i class="fa fa-clock-o"></i>date Posted: <a href="#">{{$art->created_at}}</a></span><br>
-                            
-                            <form action="/shooping-cart/{{$art->id}}" class="" method="POST">
-                            {{ csrf_field() }}
-                              <input type="hidden" name="art_id" value = "{{$art->id}}">
-                              
-                             <button type="submit" class="btn btn-default">add to Cart</button>
-                            </form>
+                            @if(auth()->user()->usertype == 'user')
+                              <form action="/managecart.php"  method="POST">
+                              {{ csrf_field() }}
+                                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                                <input type="hidden" name="item-name" value="{{$art->name}}">
+                                <input type="hidden" class="hidden" name="price" value="{{$art->price}}">
+                              <button type="submit" class="btn btn-default" name="add-to-cart">add to Cart</button>
+                              </form>
+                            @endif
                             
                            
               </div>
                </div>
+
+
+               
 
            
             

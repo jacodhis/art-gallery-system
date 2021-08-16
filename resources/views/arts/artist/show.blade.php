@@ -20,7 +20,7 @@ artist |Dashboard
               <div class="card-header">
                <div class="d-flex align-items-baseline justify-content-between">
                  <h5 class="title">{{$art->name}}</h5>
-                 <a href="/allarts">view Arts</a>
+                 <a href="{{route('all-Arts')}}">view Arts</a>
 
                </div>
                </div>

@@ -23,10 +23,10 @@ class artsController extends Controller
            $allarts = art::orderBy('created_at','DESC')->get();
                return view('arts.indexall',compact('allarts'));
        }
-    //    elseif(auth()->user()->usertype == 'admin'){
-    //     $allarts = art::orderBy('created_at','DESC')->get();
-    //     return view('arts.indexall',compact('allarts'));
-    //    }
+       elseif(auth()->user()->usertype == 'admin'){
+        $allarts = art::orderBy('created_at','DESC')->get();
+        return view('arts.adminindexall',compact('allarts'));
+       }
 
     }
 //my arts
@@ -82,15 +82,16 @@ class artsController extends Controller
     //show specific art
 
     public function show($id){
+      
         $art = art::findorFail($id);
         if(auth()->user()->usertype == 'artist'){
             return view('arts.artist.show',['art'=>$art]);
            }elseif(auth()->user()->usertype == 'user'){ 
             return view('arts.user.show',['art'=>$art]);
            }
-        //    elseif(auth()->user()->usertype == 'admin'){
-        //     return view('arts.admin.show',['art'=>$art]);
-        //    }
+           elseif(auth()->user()->usertype == 'admin'){
+            return view('arts.admin.show',['art'=>$art]);
+           }
         // return $art;
        
     }
