@@ -38,9 +38,11 @@ Route::get('/art/{id}','artsController@show')->name('show-art');
 
 
 //art shopping cart
-Route::post('/shooping-cart/{id}','shoppingcartController@cart')->name('add-to-cart');
+Route::post('/shopping-cart/{id}','shoppingcartController@cart')->name('add-to-cart');
 Route::get('/mycart','shoppingcartController@mycart')->name('my-cart');
-
+//other cart
+Route::get('/cart','shoppingcartController@my_cart')->name('mycart');
+Route::post('/cart-remove/{id}','shoppingcartController@cart_remove')->name('cart-remove');
 //auth
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

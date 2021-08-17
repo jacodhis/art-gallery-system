@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          //if cart has any item
          if(isset($_SESSION['cart'])){
               //checks if item is in cart already
+              
              $my_items = array_column($_SESSION['cart'],'name');
              if(in_array($_POST['item-name'],$my_items)){
                  echo "<script>alert('item already added');

@@ -156,8 +156,9 @@
               <div class="card-header">
                <div class="d-flex align-items-baseline justify-content-between">
                  <h5 class="title">my cart</h5>
+
                  <?php 
-                   
+                  
                     $count = 0;
                     if(isset($_SESSION['cart'])){
                         $count = count($_SESSION['cart']);
@@ -193,42 +194,37 @@
                             <?php 
                           
                             $total = 0;
-                            $qun = 1;
-
-                            
-                        
+                           
                             if(isset($_SESSION['cart'])){
-                                // $my_items = array_column($_SESSION['cart'],'user_id');
-                                // if(in_array(auth()->user()->id,$my_items)){
-                                   
-                                // }else{
-
-                                // }
-
-                                foreach($_SESSION['cart'] as $key => $value){
-                                    $sr = $key+1;
-                                    $total = $total+$value['price'];
-                                     
-                                    ?>
-                                   
-                                    <tr>
-                                      <td><?php echo $value['user_id'];?></td>
-                                        <td><?php echo $value['name'];?></td>
-                                        <td><?php echo $value['price'];?></td>
+                               foreach($_SESSION['cart'] as $session){
+                                $total = $total+$session['price'];
+                                   if($session['user_id'] == auth()->user()->id){
+                                    //    echo count($_SESSION['cart']);
+                                       ?>
+                                     <tr>
+                                      <td><?php echo $session['user_id'];?></td>
+                                        <td><?php echo $session['name'];?></td>
+                                        <td><?php echo $session['price'];?></td>
                                         
-                                        <td><input type="number" class = "text-center" value="<?php echo $value['quantity'];?>" min="1" max="10"></td>
+                                        <td><input type="number" class = "text-center" value="<?php echo $session['quantity'];?>" min="1" max="10"></td>
                                         <td>
                                             <form action="managecart.php" method="POST">
-                                                <input type="hidden" name="item_name" value="<?php echo $value['name']?>">
+                                                <input type="hidden" name="item_name" value="<?php echo $session['name']?>">
                                                 
                                             <button class="btn btn-sm btn-outline-danger" name="remove_item">remove</button>
                                             </form>
                                         </td>
                                     </tr>
-             
-             
-                                <?php
-                                 }
+
+
+                                    <?php
+                                   }else{
+                                         
+                                   }
+                               }
+                               
+
+                               
                                 
                             }else{
                                 echo "cart items = 0 ";

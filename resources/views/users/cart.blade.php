@@ -1,4 +1,6 @@
-
+<?php 
+ session_start() ;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +10,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        @yield('title')
+     my cart|items
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -65,20 +67,8 @@
                     </a>
                 </li>
 
-                <li>
-                    <?php 
-                    session_start();
-                    $count = 0;
-                    if(isset($_SESSION['cart'])){
-                        $count = count($_SESSION['cart']);
-
-                    }
-                    ;?>
-                    <!-- <a href="/mycart.php" class="d-flex"> -->
-                    <a href="/mycart" class="d-flex">
-                         <img src="/images/cart-logo.png" style="height:20px"  >
-                        <p class="pl-4">My Cart(<?php echo $count ;?>)</p>
-                    </a>
+           
+                
                 </li>
             
               
@@ -136,18 +126,11 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                  
-                                   
-                                    loguserout
-                                   
-                        
-                               
-                    
+                                    {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
-                                  
                                 </form>
 
 
@@ -164,7 +147,129 @@
         </nav>
         <!-- End Navbar -->
 
-        @yield('content')
+        <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+               <div class="d-flex align-items-baseline justify-content-between">
+                 <h5 class="title">my cart</h5>
+
+                 <?php 
+                  
+                    $count = 0;
+                    if(isset($_SESSION['cart'])){
+                        $count = count($_SESSION['cart']);
+
+                    }
+                    ;?>
+                 <a href="/mycart" class="d-flex">
+                         <img src="/images/cart-logo.png" style="height:20px"  >
+                        <p class="pl-4">My Cart(<?php echo $count ;?>)</p>
+                    </a>
+               </div>
+                            
+             
+
+               <div class="container">
+                    <div class="row">
+                   <div class="col-lg-12 text-center border rounded bg-light my-5">
+                    <h1>My Cart</h1>
+               </div>
+
+            <div class="col-md-8">
+            
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">art_id</th>
+                                <th scope="col">Item name</th>
+                                <th scope="col">Item Price</th>
+                                <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                        <tbody class="text-center">
+                           
+                            @if(session('cart'))
+                             @foreach(session('cart') as $id => $art)
+                             <tr>
+                                      <td><img src="<?php echo $art['image']; ?>" height="50" width="50" ></td>
+                                      <td><?php echo 'one';?></td>
+                                        <td><?php echo $art['name'];?></td>
+                                        <td><?php echo $art['price'];?></td>
+                                        
+                                        <td><input type="number" class = "text-center" value="<?php echo $art['quantity'] ;?>" min="1" max="10"></td>
+                                        <td>
+                                            <form action="/cart-remove/<?php echo $art['art_id']?>" method="POST">
+                                            @csrf
+                                               <button class="btn btn-sm btn-outline-danger" name="remove_item">remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                             @endforeach
+                             @else
+                             <p>no cart</p>
+                            @endif
+                           
+                        
+                         </tbody>
+                        </table>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="border bg-light rounded p-4">
+                <h3 class="">Total : <?php echo 'hi';?></h3>
+                <form action="" method="post">
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                     m-pesa
+                    </label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      check on delivery option
+                    </label>
+                    </div>
+                    <button class="btn btn-primary btn-block">make payment</button>
+                </form>
+
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    
+
+               </div>
+              
+
+            
+
+
+               
+
+           
+            
+
+             
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
 
 
 
@@ -212,3 +317,4 @@
 </body>
 
 </html>
+
