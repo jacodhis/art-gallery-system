@@ -23,7 +23,7 @@ class MpesaController extends Controller
             $PhoneNumber = $request->phone;
             $CallBackURL = 'http://dccf7078e5bd.ngrok.io/folder/callback.php';
             // $CallBackURL = 'http://84599e097069.ngrok.io/callback';
-            $AccountReference = 'TestStk';
+            $AccountReference = 'art-gallery-payment';
             $TransactionDesc = 'Payment product X';
             $Remarks = 'Payment Succefull!';
 

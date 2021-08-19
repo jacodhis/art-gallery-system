@@ -26,5 +26,8 @@ $stkCallbackResponse = file_get_contents('php://input');
     
      $query = mysqli_query($conn,$sqlinsert);
      if($query){
-         echo "Payment Successfull";
+      echo "<script>alert('payment done successfully ');
+                           window.location.href = 'all-Arts';
+                        </script>";
+        //  echo "Payment Successfull";
      }
