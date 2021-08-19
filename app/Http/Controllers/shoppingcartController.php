@@ -34,36 +34,20 @@ class shoppingcartController extends Controller
               
     }
    public function cart_remove(Request $request,$catid){
-    //  return $catid;
-    // $sessions = $request->session()->all();
-    // dd($sessions);
-    // $session = $request->session()->catid;
-    // dd($session);
-
-    
-    // foreach($sessions as $session =>$art){
-        // print_r($art);
-    // }
-    // $value = $request->session()->pull('key', 'default');
-    
-    $arts = session('cart');
-    // dd($arts);
-    
-        foreach($arts as $key => $art){
-            if($art['art_id'] == $catid){
-                // echo $art['art_id'];
-                $request->session()->pull($art['art_id'],$catid);              
-            }
+       $art = art::findorFail($catid);
+       $arts = session('cart');
+   
+    foreach($arts as $key =>$value){
+     
+        if($value['name'] == $art->name){
+            unset($arts[$key]);
+            session()->put('cart',$arts);
+              return redirect()->route('mycart');
         }
-        // session()->put('cart',$arts);
-        print_r($arts);
+    }
+       
 
-        // $request->session()->push('cart',$arts); 
-        // return $arts;
-        // return view('users.cart');
-        // return redirect()->back()->with('success','art deleted from cart');
-     
-     
+      
       }
    
     public function my_cart(){
