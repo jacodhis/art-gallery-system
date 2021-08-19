@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\art;
+use App\at;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -14,17 +14,19 @@ class artsController extends Controller
     }
     //
     public function index(){
+        // return 'hi';
        
        $auth_id = auth()->user()->id;
        if(auth()->user()->usertype == 'artist'){
-        $arts = art::where('user_id', '!=', $auth_id)->orderBy('created_at','DESC')->get();
+        $arts = at::where('user_id', '!=', $auth_id)->orderBy('created_at','DESC')->get();
          return view('arts.index',compact('arts'));
        }elseif(auth()->user()->usertype == 'user'){
-           $allarts = art::orderBy('created_at','DESC')->get();
+           $allarts = at::orderBy('created_at','DESC')->get();
+        //    return $allarts;
                return view('arts.indexall',compact('allarts'));
        }
        elseif(auth()->user()->usertype == 'admin'){
-        $allarts = art::orderBy('created_at','DESC')->get();
+        $allarts = at::orderBy('created_at','DESC')->get();
         return view('arts.adminindexall',compact('allarts'));
        }
 
@@ -32,7 +34,7 @@ class artsController extends Controller
 //my arts
     public function arts($id){
         $user = User::findorFail($id);
-         $arts = art::where('user_id','=',$user->id)->orderBy('created_at','DESC')->get();
+         $arts = at::where('user_id','=',$user->id)->orderBy('created_at','DESC')->get();
          if($arts){
              return view('arts.myarts',compact('arts'));
          }else{
@@ -56,7 +58,7 @@ class artsController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-]);
+       ]);
         //
 
          if ($request->hasFile('art')) {
@@ -69,13 +71,13 @@ class artsController extends Controller
             $filenametostore = 'noimage.jpg';
         }
 
-           $art = new art;
+                  $art = new at;
                     $art->image = $filenametostore; 
                     $art->name = $request->input('name');
                     $art->description = $request->input('description');
                     $art->price= $request->input('price');
                     $art->user_id= auth()->user()->id;
-           $art->save();
+                    $art->save();
            return redirect()->back()->with('success','art Added successfully');
     }
 
@@ -83,7 +85,7 @@ class artsController extends Controller
 
     public function show($id){
       
-        $art = art::findorFail($id);
+        $art = at::findorFail($id);
         if(auth()->user()->usertype == 'artist'){
             return view('arts.artist.show',['art'=>$art]);
            }elseif(auth()->user()->usertype == 'user'){ 

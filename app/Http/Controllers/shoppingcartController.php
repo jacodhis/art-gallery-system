@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\art;
+use App\at;
 use Illuminate\Http\Request;
-// use session;
-use Illuminate\Support\Facades\Session;
+use session;
+// use Illuminate\Support\Facades\Session;
 
 class shoppingcartController extends Controller
 {
@@ -15,11 +15,8 @@ class shoppingcartController extends Controller
     }
     //
     public function cart(Request $request,$id){
-        $art = art::findorFail($id);
-    //  return $art;
+        $art = at::findorFail($id);
          $cart  = session()->get('cart');
-        //  dd($cart);
-
          $cart[$id] = [
              'art_id' => $art->id,
              'name'=>$art->name,
@@ -27,14 +24,12 @@ class shoppingcartController extends Controller
              'image' => $art->image,
              'quantity' => 1,
          ];
-        //  session_abort();
           session()->put('cart',$cart);
-        //  dd($add);
          return redirect()->route('mycart');
               
     }
    public function cart_remove(Request $request,$catid){
-       $art = art::findorFail($catid);
+       $art = at::findorFail($catid);
        $arts = session('cart');
    
     foreach($arts as $key =>$value){
@@ -42,7 +37,7 @@ class shoppingcartController extends Controller
         if($value['name'] == $art->name){
             unset($arts[$key]);
             session()->put('cart',$arts);
-              return redirect()->route('mycart');
+              return redirect()->route('mycart')->with('success','art deleted from cart');
         }
     }
        
@@ -62,17 +57,17 @@ class shoppingcartController extends Controller
     }
     //
 
-    public function mycart(){
+    // public function mycart(){
 
         
-        $auth_id = auth()->user()->id;
+    //     $auth_id = auth()->user()->id;
        
-        if(auth()->user()->usertype == 'user'){
-          return view('users.mycart');
-        }else{
-            return redirect()->route('home')->with('error','not allowed to view cart page');
-        }
-    }
+    //     if(auth()->user()->usertype == 'user'){
+    //       return view('users.mycart');
+    //     }else{
+    //         return redirect()->route('home')->with('error','not allowed to view cart page');
+    //     }
+    // }
 
 
 

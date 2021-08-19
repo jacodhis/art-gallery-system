@@ -159,15 +159,21 @@
 
                  <?php 
                   
-                    $count = 0;
-                    if(isset($_SESSION['cart'])){
-                        $count = count($_SESSION['cart']);
+                    // $count = 0;
+                    // if(isset($_SESSION['cart'])){
+                    //     $count = count($_SESSION['cart']);
 
-                    }
-                    ;?>
+                    // }
+                    // ;?>
                  <a href="/mycart" class="d-flex">
                          <img src="/images/cart-logo.png" style="height:20px"  >
-                        <p class="pl-4">My Cart(<?php echo $count ;?>)</p>
+                        <p class="pl-4">
+                            @if(session('cart'))
+                             <p>{{count(session('cart'))}}</p>
+                            @else
+                            <p>0</p>
+                            @endif
+                            </p>
                     </a>
                </div>
                             
@@ -191,9 +197,10 @@
                                 </tr>
                             </thead>
                         <tbody class="text-center">
-                           
+                           <?php    $total = 0;;?>
                             @if(session('cart'))
                              @foreach(session('cart') as $id => $art)
+                            <?php $total = $total+ $art['price']; ?>
                              <tr>
                                       <td><img src="<?php echo $art['image']; ?>" height="50" width="50" ></td>
                                       <td><?php echo 'one';?></td>
@@ -222,19 +229,25 @@
 
             <div class="col-md-4">
                 <div class="border bg-light rounded p-4">
-                <h3 class="">Total : <?php echo 'hi';?></h3>
-                <form action="" method="post">
+                <h3 class="">Total : <?php echo $total;?></h3>
+                <form action="{{route('stk')}}" method="post">
+                    @csrf
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                     m-pesa
-                    </label>
-                    </div>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            m-pesa
+                            </label>
+                            <input type="hidden" name="amount" value="<?php echo $total; ?>" required>  
+                            <input type="text" name="phone" value="{{Auth()->user()->phone}}" required>
+                           
+                        </div>
+                       
+
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      check on delivery option
-                    </label>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        check on delivery option
+                        </label>
                     </div>
                     <button class="btn btn-primary btn-block">make payment</button>
                 </form>

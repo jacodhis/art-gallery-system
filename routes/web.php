@@ -17,7 +17,7 @@ Route::get('/', function () {
 //view profile forany user
 Route::get('/profile/{user_id}','usersController@profile')->name('profile');
 //update any users profile 
-Route::PUT('/update-user-profile','usersController@updateprofile')->name('update-user   ');
+Route::PUT('/update-user-profile','usersController@updateprofile')->name('update-user');
 
 //admin view users
 Route::get('/users','usersController@users')->name('users');
@@ -43,6 +43,10 @@ Route::post('/shopping-cart/{id}','shoppingcartController@cart')->name('add-to-c
 //other cart
 Route::get('/cart','shoppingcartController@my_cart')->name('mycart');
 Route::post('/cart-remove/{id}','shoppingcartController@cart_remove')->name('cart-remove');
+
+//payment via mpesa
+Route::post('pay-via-mpesa-online','MpesaController@stk')->name('stk');
+
 //auth
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArtsTable extends Migration
+class CreateAtsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateArtsTable extends Migration
      */
     public function up()
     {
-        Schema::create('arts', function (Blueprint $table) {
+        Schema::create('ats', function (Blueprint $table) {
             $table->bigIncrements('id');
-             $table->string('name');
-              $table->string('image');
-              $table->string('price');
-              $table->longText('description');
-
-               $table->unsignedBigInteger('user_id');
-                $table->index('user_id');
+            $table->string('name');
+            $table->string('image');
+            $table->string('price');
+            $table->longText('description');
+            $table->unsignedBigInteger('user_id');
+            $table->index('user_id');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateArtsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arts');
+        Schema::dropIfExists('ats');
     }
 }
