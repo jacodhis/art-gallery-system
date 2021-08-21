@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>{{ config('app.name', 'Arts') }}</title>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -64,8 +67,31 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+        <div class="flex-center position-ref full-height">            
+              <div id="" class="carousel slide pt-3" data-ride="carousel" >
+                <div class="carousel-inner">
+                    <div class="carousel-item active "> 
+                      <img id ="image" class="d-block w-100" src="/images/8a0eb84545901eb1d608fe1c833d6cb41e2f3a466cb24f412873906089e526439eca03c8a293eceb434a57fb6bf1ad7160da5a1104e076d6a89826_1280.jpg" alt="First slide">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Welcome Art Gallery Website</h5>
+                        <p>Shop With Us</p>
+                    </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img id ="image" class="d-block w-100" src="/images\4576a233e39f30e9d96c1693badd5ba94accd0e37f75195662d3a87fb49ea030a24c069a217a31505421b09d9a2226150197502b5f143e4b0c6b03_1280.jpg" alt="Second slide">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Welcome Art Gallery Website</h5>
+                        <p>No Better Place For Arts Than Us</p>
+                    </div>
+                    </div>
+                 </div> 
+              </div> 
+        </div>
+    </body>
+</html>
+
+
+             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -79,21 +105,7 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                   Arts Gallery System
-                </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+
+
+            
