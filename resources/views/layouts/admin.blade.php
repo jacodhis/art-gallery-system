@@ -183,7 +183,7 @@
                                 </form>
 
 
-                                <a class="dropdown-item" href="/home">Home</a>
+                                <a class="dropdown-item" href="/">Home</a>
                                
                             </div>
 

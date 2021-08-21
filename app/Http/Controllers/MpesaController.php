@@ -21,15 +21,15 @@ class MpesaController extends Controller
             $PartyA = $request->phone;
             $PartyB = env('SHORTCODE');
             $PhoneNumber = $request->phone;
-            $CallBackURL = 'http://dccf7078e5bd.ngrok.io/folder/callback.php';
-            // $CallBackURL = 'http://84599e097069.ngrok.io/callback';
+            // $CallBackURL = 'http://491b-105-163-200-73.ngrok.io/folder/callback.php';
+            $CallBackURL = 'https://982b-105-163-200-73.ngrok.io/folder/callback.php';
             $AccountReference = 'art-gallery-payment';
             $TransactionDesc = 'Payment product X';
             $Remarks = 'Payment Succefull!';
 
             $mpesa= new Mpesa();
 
-        $stkPushSimulation=$mpesa->STKPushSimulation(
+           $stkPushSimulation=$mpesa->STKPushSimulation(
             $BusinessShortCode,
             $LipaNaMpesaPasskey,
             $TransactionType,
